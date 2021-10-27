@@ -19,27 +19,27 @@ class ArticleController extends AbstractController {
         $articles = $articleRepository->findAll();
 
         // return all articles
-        return $this->render('articles/viewArticles.html.twig', [
+        return $this->render('articles/list.html.twig', [
             'articles' => $articles
         ]);
     }
 
     /**
-     * @Route("/{id}", name="view", methods="GET")
+     * @Route("/new", name="new", methods="POST")
      */
-    public function view(Article $article) {
-        // $article = $this->getDoctrine()->getRepository(Article::class)->find();
-
-        return $this->render('articles/viewArticle.html.twig', [
-            'article' => $article
-        ]);
+    public function edit() {
+        
     }
 
     /**
-     * @Route("/create", name="create", methods="POST")
+     * @Route("/{id}", name="show", methods="GET")
      */
-    public function create() {
-        
+    public function show(Article $article) {
+        // $article = $this->getDoctrine()->getRepository(Article::class)->find();
+
+        return $this->render('articles/view.html.twig', [
+            'article' => $article
+        ]);
     }
 
     /**
