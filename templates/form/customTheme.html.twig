@@ -1,0 +1,5 @@
+{% block form_label %}
+    <label for="{{ form.vars.name }}">
+        {{ form.vars.label }}: {{ form.vars.required ? '*' : '' }}
+    </label>
+{% endblock %}

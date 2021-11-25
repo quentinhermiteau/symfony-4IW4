@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +20,7 @@ class ArticleController extends AbstractController {
         $articles = $articleRepository->findAll();
 
         // return all articles
-        return $this->render('articles/list.html.twig', [
+        return $this->render('articles/index.html.twig', [
             'articles' => $articles
         ]);
     }
@@ -37,7 +38,7 @@ class ArticleController extends AbstractController {
     public function show(Article $article) {
         // $article = $this->getDoctrine()->getRepository(Article::class)->find();
 
-        return $this->render('articles/view.html.twig', [
+        return $this->render('articles/show.html.twig', [
             'article' => $article
         ]);
     }
