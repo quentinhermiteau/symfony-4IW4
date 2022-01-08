@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -21,7 +21,7 @@ class CategoryController extends AbstractController {
     public function index(CategoryRepository $articleRepository) {
         $categories = $articleRepository->findAll();
 
-        return $this->render('categories/list.html.twig', [
+        return $this->render('admin/categories/list.html.twig', [
             'categories' => $categories
         ]);
     }
@@ -41,7 +41,7 @@ class CategoryController extends AbstractController {
             return $this->redirectToRoute('categories_index');
         }
 
-        return $this->renderForm('categories/new.html.twig', [
+        return $this->renderForm('admin/categories/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -50,7 +50,7 @@ class CategoryController extends AbstractController {
      * @Route("/{id}", name="show", methods="GET")
      */
     public function show(Category $category) {
-        return $this->render('categories/view.html.twig', [
+        return $this->render('admin/categories/show.html.twig', [
             'categ$category' => $category
         ]);
     }

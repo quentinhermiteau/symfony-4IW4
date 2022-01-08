@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Project</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="{{app.request.attributes.get('_route') is same as('article_index') ? 'nav-link active' : 'nav-link'}}" aria-current="page" href="{{path('article_index')}}">Articles</a>
+        </li>
+        <li class="nav-item">
+          <a class="{{app.request.attributes.get('_route') is same as('categories_index') ? 'nav-link active' : 'nav-link'}}" href="{{path('categories_index')}}">Comments</a>
+        </li>
+      </ul>
+      {% if is_granted('ROLE_ADMIN') %}
+        <span class="text-white me-2 cursor-pointer" onclick="window.location='{{ app.request.pathInfo starts with '/admin' ? path("article_index") : path("admin_article_index") }}'">
+          {{ app.request.pathInfo starts with '/admin' ? 'Site' : 'Dashboard'}}
+        </span>
+      {% endif %}
+      <span class="text-white me-2">
+        {{app.user.username}}
+      </span>
+      <span class="text-danger fw-bold cursor-pointer" onclick="window.location='{{ path("app_logout") }}'">
+        Logout
+      </span>
+    </div>
+  </div>
+</nav>

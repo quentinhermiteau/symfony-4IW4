@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="text-center">Articles:</h1>
+
+    <div class="row">
+    {% for article in articles %}
+        <div class="col-4">
+            <div class="card shadow rounded cursor-pointer" onclick="window.location='{{ path("article_show", {id: article.id}) }}'">
+                <div class="card-body flex flex-column">
+                    <p>{{article.title}}</p>
+                    <div class="row">
+                        <div class="text-truncate">
+                            {{article.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
