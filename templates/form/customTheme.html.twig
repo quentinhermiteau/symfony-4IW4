@@ -15,7 +15,7 @@
     {% else %}
         <div class="mb-3">
             <label for="{{ form.vars.name }}" class="form-label">
-                {{ form.vars.label }}: {{ form.vars.required ? '*' : '' }}
+                {{ form.vars.label ? form.vars.label : form.vars.name|capitalize }}: {{ form.vars.required ? '*' : '' }}
             </label>
             {% for error in form.vars.errors %}
                 <p class="text-danger">{{error.message}}</p>
