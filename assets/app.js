@@ -11,6 +11,7 @@ import "./styles/app.scss";
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 const bootstrap = require("bootstrap");
+const $ = require("jquery");
 
 const popoverTriggerList = [].slice.call(
   document.querySelectorAll('[data-bs-toggle="popover"]')

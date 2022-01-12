@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Create new Article</h1>
 
-    {{ include('article/_form.html.twig') }}
+    {{ include('admin/article/_form.html.twig') }}
 
-    <a href="{{ path('article_index') }}">back to list</a>
+    <button class="btn btn-light"><a class="text-reset text-decoration-none" href="{{ path('admin_article_index') }}">Back to list</a></button>
+    
 {% endblock %}

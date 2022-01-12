@@ -18,12 +18,15 @@
           {{ app.request.pathInfo starts with '/admin' ? 'Site' : 'Dashboard'}}
         </span>
       {% endif %}
-      <span class="text-white me-2">
-        {{app.user.username}}
-      </span>
-      <span class="text-danger fw-bold cursor-pointer" onclick="window.location='{{ path("app_logout") }}'">
-        Logout
-      </span>
+
+      {% if is_granted('ROLE_USER') %}
+        <span class="text-white me-2">
+          {{app.user.username}}
+        </span>
+        <span class="text-danger fw-bold cursor-pointer" onclick="window.location='{{ path("app_logout") }}'">
+          Logout
+        </span>
+      {% endif %}
     </div>
   </div>
 </nav>
