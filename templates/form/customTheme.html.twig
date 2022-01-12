@@ -3,25 +3,39 @@
         <div class="text-center">
             <button type="submit" class="btn btn-primary mt-2">{{ form.vars.label }}</button>
         </div>
-    {% elseif form.vars.block_prefixes[1] is same as('checkbox') %}
-        <label for="{{ form.vars.id }}" class="form-label">
-            {{ form.vars.label }}: {{ form.vars.required ? '*' : '' }}
-        </label>
-        {% if form.vars.required %}
-            <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" required="required" value="1">
-        {% else %}
-            <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" value="1">
-        {% endif %}
     {% else %}
         <div class="mb-3">
             <label for="{{ form.vars.name }}" class="form-label">
                 {{ form.vars.label ? form.vars.label : form.vars.name|capitalize }}: {{ form.vars.required ? '*' : '' }}
             </label>
+            {% if form.vars.block_prefixes[1] is same as('checkbox') %}
+                {% if form.vars.required %}
+                    <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" required value="1">
+                {% else %}
+                    <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" value="1">
+                {% endif %}
+            {% elseif form.vars.block_prefixes[1] is same as('choice') %}
+                <select id="{{form.vars.id}}" class="form-select" name="{{form.vars.full_name}}" value="{{form.vars.value}}">
+                    <option selected>Choose a category</option>
+                    {% for choice in form.vars.choices %}
+                        <option selected="{{form.vars.value is same as(choice.value) ? 'selected' : null}}" value="{{choice.value}}">{{choice.label}}</option>
+                    {% endfor %}
+                </select>
+            {% elseif form.vars.block_prefixes[1] is same as('vich_image') %}
+                <div class="vich-image">
+                    <input class="form-control" type="file" id="{{form.vars.id}}" name="{{form.vars.full_name}}" accept="image/*">
+                </div>
+            {% else %}
+                {% if form.vars.required %}
+                    <input type="{{form.vars.block_prefixes[1]}}" class="form-control" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}" required>
+                {% else %}
+                    <input type="{{form.vars.block_prefixes[1]}}" class="form-control" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}">
+                {% endif %}
+            {% endif %}
+            {{form_help(form)}}
             {% for error in form.vars.errors %}
                 <p class="text-danger">{{error.message}}</p>
             {% endfor %}
-            <input type="{{form.vars.block_prefixes[2]}}" class="form-control" id="{{ form.vars.name }}" name="{{form.vars.full_name}}">
-            {{form_help(form)}}
         </div>
     {% endif %}
 {% endblock %}
