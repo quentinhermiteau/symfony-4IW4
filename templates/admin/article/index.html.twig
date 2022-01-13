@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
-                <td>{{ article.content }}</td>
+                <td>{{ article.content|u.truncate(150, '...') }}</td>
                 <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>

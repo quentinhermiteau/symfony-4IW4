@@ -21,7 +21,7 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
      */
     private $content;
 
@@ -30,6 +30,12 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
 
     public function getId(): ?int
     {
@@ -56,6 +62,18 @@ class Comment
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

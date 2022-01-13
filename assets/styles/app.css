@@ -6,3 +6,8 @@ body {
   width: 100px;
   height: 100px;
 }
+
+.image-card {
+  max-width: 200px;
+  max-height: 200px;
+}

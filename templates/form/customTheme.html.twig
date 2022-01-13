@@ -28,11 +28,17 @@
             <div class="vich-image">
                 <input class="form-control" type="file" id="{{form.vars.id}}_file" name="{{form.vars.full_name}}[file]" accept="image/*">
             </div>
+        {% elseif form.vars.block_prefixes[2] is same as('textarea') %}
+            {% if form.vars.required %}
+                <textarea class="form-control" aria-label="With textarea" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}" required></textarea>
+            {% else %}
+                <textarea class="form-control" aria-label="With textarea" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}"></textarea>
+            {% endif %}
         {% else %}
             {% if form.vars.required %}
-                <input type="{{form.vars.block_prefixes[1]}}" class="form-control" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}" required>
+                <input type="{{form.vars.block_prefixes[2]}}" class="form-control" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}" required>
             {% else %}
-                <input type="{{form.vars.block_prefixes[1]}}" class="form-control" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}">
+                <input type="{{form.vars.block_prefixes[2]}}" class="form-control" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{form.vars.value}}">
             {% endif %}
         {% endif %}
         {{form_help(form)}}

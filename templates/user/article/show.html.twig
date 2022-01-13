@@ -2,6 +2,24 @@
 
 {% block body %}
     <button class="btn btn-light" onclick="window.location='{{ path("article_index") }}'">Retour à la liste des articles</button>
+    <div class="d-flex justify-content-center">
+        <img src="{{asset('images/articles/' ~ article.imageName)}}"></img>
+    </div>
     <h1>{{ article.title }}</h1>
     <p>{{ article.content }}</p>
+
+    <h3>Commentaires</h3>
+    {% for comment in article.comments %}
+        <div class="card p-3">
+            <h5>{{comment.owner.email}}</h5>
+            <span>{{comment.content}}</span>
+            <span>{{comment.createdAt|date('d/m/Y')}}</span>
+        </div>
+    {% endfor %}
+    {# Override custom form theme #}
+    {# {% form_theme form 'bootstrap_5_layout.html.twig' %} #}
+    {{form_start(form)}}
+        {{form_widget(form)}}
+        <button class="btn btn-primary">Send</button>
+    {{form_end(form)}}
 {% endblock %}

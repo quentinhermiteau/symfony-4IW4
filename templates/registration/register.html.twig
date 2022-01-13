@@ -9,13 +9,7 @@
                 <div class="text-center">
                     <h2>Register:</h2>
                 </div>
-                {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword, {
-                        label: 'Password'
-                    }) }}
-                    {{ form_row(registrationForm.agreeTerms) }}
-                {{ form_end(registrationForm) }}
+                {{ form(registrationForm) }}
                 <a href="{{ path('login') }}" class="link-primary">Already have an account? Go to login page</a>
             </div>
         </div>

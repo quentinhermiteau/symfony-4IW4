@@ -3,7 +3,9 @@
 namespace App\Controller\User;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,11 +44,26 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    #[Route('/{id}', name: 'article_show', methods: ['GET', 'POST'])]
+    public function show(Article $article, Request $request): Response
     {
-        return $this->render('user/article/show.html.twig', [
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setArticle($article);
+            $comment->setOwner($this->getUser());
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('article_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/article/show.html.twig', [
             'article' => $article,
+            'form' => $form
         ]);
     }
 

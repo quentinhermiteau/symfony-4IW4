@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +30,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -37,6 +49,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="owner")
+     */
+    private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +78,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -125,5 +176,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getOwner() === $this) {
+                $comment->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
     }
 }

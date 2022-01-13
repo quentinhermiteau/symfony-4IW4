@@ -10,7 +10,7 @@
           <a class="{{app.request.attributes.get('_route') is same as('article_index') ? 'nav-link active' : 'nav-link'}}" aria-current="page" href="{{path('article_index')}}">Articles</a>
         </li>
         <li class="nav-item">
-          <a class="{{app.request.attributes.get('_route') is same as('categories_index') ? 'nav-link active' : 'nav-link'}}" href="{{path('categories_index')}}">Comments</a>
+          <a class="{{app.request.attributes.get('_route') is same as('categories_index') ? 'nav-link active' : 'nav-link'}}" href="{{path('categories_index')}}">Categories</a>
         </li>
       </ul>
       {% if is_granted('ROLE_ADMIN') %}

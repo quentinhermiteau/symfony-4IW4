@@ -55,14 +55,14 @@ class Article
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var string|null
      */
     private $imageName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      *
      * @var int|null
      */
@@ -160,7 +160,7 @@ class Article
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updated_at = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
