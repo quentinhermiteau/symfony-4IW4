@@ -4,6 +4,13 @@
     <h1 class="text-center">Articles:</h1>
 
     <div class="row">
+    {{ 'buttons.delete'|trans({'%count%': 4, '%item%': 'tomates'}) }}
+    <br/>
+    {% trans with {'%count%': 4, '%item%': 'tomates'} %}buttons.delete{% endtrans %}
+    <br/>
+    {{ 'title'|trans({}, 'articles') }}
+    <br/>
+    {% trans from 'articles' %}title{% endtrans %}
     {% for article in articles %}
         <div class="col-4">
             <div class="card shadow rounded cursor-pointer" onclick="window.location='{{ path("article_show", {id: article.id}) }}'">

@@ -1,0 +1,5 @@
+App\Entity\Article:
+  articles_{1..10}:
+    title: <streetName()>
+    content: <realTextBetween(100, 200, 2)>
+    category: "@category_*"

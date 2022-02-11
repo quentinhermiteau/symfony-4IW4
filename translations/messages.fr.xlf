@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Mon titre</target>
+      </trans-unit>
+      <trans-unit id="ZPgRQAU" resname="form.title">
+        <source>form.title</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="KRQvqxK" resname="buttons.save">
+        <source>buttons.save</source>
+        <target>Sauvegarder</target>
+      </trans-unit>
+      <trans-unit id="kXWMUuO" resname="buttons.edit">
+        <source>buttons.edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="_k8doYd" resname="buttons.delete">
+        <source>buttons.delete</source>
+        <target>Supprimer %count% %item%</target>
+      </trans-unit>
+      <trans-unit id="zhcwFyw" resname="errors.mail">
+        <source>errors.mail</source>
+        <target>Erreur de mail</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,12 @@
+title: Mon titre
+form:
+  title: Titre
+
+buttons:
+  save: Sauvegarder
+  edit: Modifier
+  delete: Supprimer %count% %item%
+
+errors:
+  mail: Erreur de mail
+  notEmpty: Ne peut pas être vide
